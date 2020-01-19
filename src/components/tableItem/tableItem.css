@@ -1,0 +1,27 @@
+
+.tableTr {
+    cursor: pointer;
+}
+
+.tableTr:nth-child(1n) {
+    background: #f6f6f6;
+}
+.tableTr:nth-child(1n):hover {
+    background: #ffe8e8; transition-duration: 0.6s;
+}
+
+.tableTr:nth-child(2n) {
+    background: #e6e6e6;
+}
+.tableTr:nth-child(2n):hover {
+    background: #ffe8e8; transition-duration: 0.6s;
+}
+
+.tableTd {
+    padding: 15px 0;
+    border-right: 1px solid #dfdfdf;
+}
+
+.tableTd:last-child {
+    border-right: 0px;
+}

@@ -1,0 +1,9 @@
+.table {
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid #dfdfdf; 
+    border-radius: 6px;
+    border-collapse: separate;
+    border-spacing: 0px;
+    font-size: 24px;
+}
