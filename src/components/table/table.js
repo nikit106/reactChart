@@ -11,11 +11,13 @@ export default (props) => (
         <Title
             title = {props.title}
             onSort = {props.onSort}
+            sort = {props.sort}
         ></Title>
         <TableItem
             data = {props.data}
             title = {props.title}
             onSort = {props.onSort}
+            onTableItemSelect = {props.onTableItemSelect}
         ></TableItem>
             
     </table>

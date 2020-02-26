@@ -1,0 +1,19 @@
+
+
+.search__input {
+    border: 1px solid #f6f6f6;
+    height: 30px;
+    background-color: #e6e6e6;
+    padding-left: 10px;
+    font-size: 15px;
+    outline: none
+}
+
+.search__button {
+    color: white;
+    background-color: #c83240;
+    border: 1px solid #e6e6e6;
+    height: 34px;
+    width: 70px;
+    cursor: pointer;
+}

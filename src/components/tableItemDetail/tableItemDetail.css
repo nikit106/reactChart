@@ -1,0 +1,31 @@
+.tableItemDetails {
+    position: sticky;
+    top: 0;
+    min-height: 2em;
+    border: 2px solid black;
+    width: 40%;
+    padding-left: 10px;
+    background-color: white;
+}
+
+.textarea {
+    border: none;
+    height: 80px;
+    width: 370px;
+}
+
+.tableItemDetails__exit {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 10px 0 0;
+    
+}
+
+.tableItemDetails__btn {
+    color: white;
+    background-color: #c83240;
+    border: 1px solid #e6e6e6;
+    height: 25px;
+    width: 30px;
+    cursor: pointer;
+}
