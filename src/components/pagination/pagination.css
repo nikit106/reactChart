@@ -1,0 +1,14 @@
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pagination__item {
+    list-style-type: none;
+
+}
+
+.pagination__button {
+    text-decoration: none;
+    margin: 10px
+}

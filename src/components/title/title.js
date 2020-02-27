@@ -3,7 +3,6 @@ import React from 'react'
 import './title.css'
 
 const Title = (props) => {
-console.log(props.sort)
  const title = props.title.map(item => {
     return (
         <th className = "tableTh" key = {item} onClick = {props.onSort.bind(null, `${item}`)}>
