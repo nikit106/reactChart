@@ -22,7 +22,7 @@ class App extends Component{
     tableItem: null,
     currentPage: '', // массив из N-ого количества постов
     currentPageNumber: 1, // номер страницы
-    postsPerPage: 8 // сколько постов на странице
+    postsPerPage: 50 // сколько постов на странице
   }
 /*
   componentWillMount() {
@@ -39,15 +39,12 @@ class App extends Component{
     // работа с сохранением данных в localStorage
     //const data = (!localStorage.getItem('data')) ? await response.json() : await JSON.parse(localStorage.getItem('data'))
     const title = this.getTitles(data)
-    const currentPageNumber = this.state.currentPageNumber
-    const currentPage = this.getCurrentPage(data, currentPageNumber)
-    console.log(currentPage)
+    this.getCurrentPage(this.state.currentPageNumber, data)
     //data = this.onSort('desc')
     this.setState({
       data,
       title,
       isLoading: false,
-      currentPage
     })
 }
 
@@ -58,31 +55,33 @@ onSort = (sortField) => {
       (a, b) => {
 
         if (sortType === 'desc') {
-            if (a[sortField].toLowerCase() > b[sortField].toLowerCase()) {
+            if (a[sortField] > b[sortField]) {
               return 1;
             }
-            if (a[sortField].toLowerCase() < b[sortField].toLowerCase()) {
+            if (a[sortField] < b[sortField]) {
               return -1;
             }
           return 0;
         } else {
-          if (a[sortField].toLowerCase() < b[sortField].toLowerCase()) {
+          if (a[sortField] < b[sortField]) {
             return 1;
           }
-          if (a[sortField].toLowerCase() > b[sortField].toLowerCase()) {
+          if (a[sortField] > b[sortField]) {
             return -1;
           }
         return 0;
         }   
       },
   )
+  this.getCurrentPage(1, orderedData)
     this.setState({
-      data: orderedData,
       sort: sortType,
       sortField
     })
 }
-getTitles(data) {
+
+
+getTitles = (data) => {
     let a = 0
     let number = 0
     for (let i = 0; i < Object.keys(data).length; i++) {
@@ -96,29 +95,14 @@ getTitles(data) {
     return title
 }
 /*получение нужного количества страниц */
-getCurrentPage(data, currentPageNumber) {
-      const postsPerPage = this.state.postsPerPage // получаем количество постов на странице
+getCurrentPage = (currentPageNumber, data = this.state.data) => {
+      const postsPerPage = this.state.postsPerPage 
       const indexOfLastPost = currentPageNumber * postsPerPage;
       const indexOfFirstPost = indexOfLastPost - postsPerPage;
-      data = data.slice(indexOfFirstPost, indexOfLastPost) // получаем нужные 5 страниц 
-      console.log(data)
-      return data
-}
-
-paginate = (currentPageNumber) => {
-  //getCurrentPage(this.state.data, pageNumber)
-  const postsPerPage = this.state.postsPerPage // получаем количество постов на странице
-  const indexOfLastPost = currentPageNumber * postsPerPage;
-      const indexOfFirstPost = indexOfLastPost - postsPerPage;
-      let data = this.state.data
-      data = data.slice(indexOfFirstPost, indexOfLastPost) // получаем нужные 5 страниц 
-  
-  console.log(data)
-  
-  this.setState({
-    currentPage: data
-  })
-  
+      data = data.slice(indexOfFirstPost, indexOfLastPost)  
+      this.setState({
+        currentPage: data
+      })     
 }
 
 /* сохранение состояния в Localstorage
@@ -142,23 +126,26 @@ modeBase = (url) => {
 }
 
 search = (search) => {
-  console.log(search)
   const cloned = this.state.data.concat()
+  /*
   if(!search) {
-    return cloned
+    return this.getCurrentPage(1, cloned)
   }
+  */
+  console.log('rerer')
   const filteredData = cloned.filter(item => {
     return item['firstName'].toLowerCase().includes(search.toLowerCase())
         || item['lastName'].toLowerCase().includes(search.toLowerCase())
         || item['email'].toLowerCase().includes(search.toLowerCase())
   })
+  this.getCurrentPage(1, filteredData)
 
   this.setState({
     data: filteredData
   })
+  
 }
 
-  
 render() {
   
  
@@ -184,7 +171,6 @@ render() {
                 : null 
               }
                 <Table 
-                  //data = {this.state.data}
                   data = {this.state.currentPage}
                   title = {this.state.title}
                   onSort = {this.onSort}
@@ -196,7 +182,7 @@ render() {
                 <Pagination 
                   postsPerPage = {this.state.postsPerPage}
                   totalPosts = {this.state.data.length}
-                  paginate = {this.paginate}
+                  getCurrentPage = {this.getCurrentPage}
                 />
                
             </React.Fragment>
